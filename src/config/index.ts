@@ -1,18 +1,18 @@
-import { IUserData } from '@/store/slices/poll/types';
 import { IQuestion } from '../models/IQuestion';
 
 const aboutUsQuestion: IQuestion = {
   id: 10,
+  title: 'How did you heard about us',
   type: 'question',
   dataKey: 'source',
   options: [
     {
       title: 'Poster or Billboard',
-      dataValue: 'poster_billboard',
+      dataValue: 'poster_or_billboard',
     },
     {
       title: 'Friend or Family',
-      dataValue: 'friend_family',
+      dataValue: 'friend_or_family',
     },
     {
       title: 'Instagram',
@@ -20,11 +20,11 @@ const aboutUsQuestion: IQuestion = {
     },
     {
       title: 'Direct Mail or Package Insert',
-      dataValue: 'mail_package',
+      dataValue: 'mail',
     },
     {
       title: 'Online TV or Streaming TV',
-      dataValue: 'online_tv_streaming_tv',
+      dataValue: 'online_tv',
     },
     {
       title: 'TV',
@@ -40,7 +40,7 @@ const aboutUsQuestion: IQuestion = {
     },
     {
       title: 'Newspaper or Magazine',
-      dataValue: 'newspaper_magazine',
+      dataValue: 'newspaper_or_magazine',
     },
     {
       title: 'Facebook',
@@ -48,7 +48,7 @@ const aboutUsQuestion: IQuestion = {
     },
     {
       title: 'Blog Post or Website Review',
-      dataValue: 'blog_post_website',
+      dataValue: 'blog_post_or_website',
     },
     {
       title: 'Podcast',
@@ -71,16 +71,17 @@ const aboutUsQuestion: IQuestion = {
       dataValue: 'other',
     },
   ],
-  title: 'How did you heard about us',
 };
 
 const whatIsMostImportantQuestion: IQuestion = {
   id: 8,
+  title: 'What is most important to you',
   type: 'question',
-  dataKey: 'most_important',
+  dataKey: 'mostImportantThing',
   options: [
     {
       title: 'Success',
+      dataValue: 'success',
       getNextQuestionId: () => aboutUsQuestion.id,
     },
     {
@@ -99,14 +100,13 @@ const whatIsMostImportantQuestion: IQuestion = {
       getNextQuestionId: () => aboutUsQuestion.id,
     },
   ],
-  title: 'What is most important to you',
 };
 
 const isEmotionalControlTricky: IQuestion = {
   id: 9,
   title: 'Is emotional control tricky for you',
   type: 'question',
-  dataKey: 'is_emotional_control_tricky',
+  dataKey: 'isEmotionalControlTricky',
   options: [
     {
       title: 'Yes',
@@ -141,7 +141,7 @@ const howDoesItWorkQuestion: IQuestion = {
     {
       title: 'Next',
       getNextQuestionId: (userData) =>
-        userData.does_overthink === 'yes'
+        userData.tendToOverthink
           ? whatIsMostImportantQuestion.id
           : isEmotionalControlTricky.id,
     },
@@ -152,7 +152,7 @@ const overthinkQuestion: IQuestion = {
   id: 6,
   title: 'Do you tend to overthink',
   type: 'question',
-  dataKey: 'does_overthink',
+  dataKey: 'tendToOverthink',
   options: [
     {
       title: 'Yes',
@@ -171,7 +171,7 @@ const relationshipGoalsQuestion: IQuestion = {
   id: 15,
   title: 'When you think about your relationship goals, you feel...?',
   type: 'question',
-  dataKey: 'relationship_goals_feelings',
+  dataKey: 'relationshipGoalsMood',
   options: [
     {
       title: 'Optimistic! They are totally doable, with some guidance.',
@@ -193,11 +193,13 @@ const relationshipGoalsQuestion: IQuestion = {
 
 const partnerPriorityQuestion: IQuestion = {
   id: 14,
+  title: 'Do you agree with the statement below?',
+  description: 'My partner and I make sex a priority in our relationship',
   type: 'question',
   options: [
     {
       title: 'Strongly agree',
-      dataValue: 'strongly_agree',
+      dataValue: 'stronglyAgree',
       getNextQuestionId: () => relationshipGoalsQuestion.id,
     },
     {
@@ -217,15 +219,15 @@ const partnerPriorityQuestion: IQuestion = {
     },
     {
       title: 'Strongly disagree',
-      dataValue: 'strongly_disagree',
+      dataValue: 'stronglyDisagree',
       getNextQuestionId: () => relationshipGoalsQuestion.id,
     },
   ],
-  title: 'Do you agree with the statement below?',
 };
 
 const partnerGenderQuestion: IQuestion = {
   id: 13,
+  title: 'What is your partner`s gender?',
   type: 'question',
   options: [
     {
@@ -239,14 +241,13 @@ const partnerGenderQuestion: IQuestion = {
       getNextQuestionId: () => partnerPriorityQuestion.id,
     },
   ],
-  title: 'What is your partner`s gender?',
 };
 
 const partnerIntrovertOrExtrovertQuestion: IQuestion = {
-  title: 'Is your partner an introvert or extrovert?',
   id: 12,
+  title: 'Is your partner an introvert or extrovert?',
   type: 'question',
-  dataKey: 'partner_personality',
+  dataKey: 'partnerPersonality',
   options: [
     {
       title: 'Introvert',
@@ -260,7 +261,7 @@ const partnerIntrovertOrExtrovertQuestion: IQuestion = {
     },
     {
       title: 'A bit of both',
-      dataValue: 'both',
+      dataValue: 'ambivert',
       getNextQuestionId: () => partnerGenderQuestion.id,
     },
   ],
@@ -269,9 +270,9 @@ const partnerIntrovertOrExtrovertQuestion: IQuestion = {
 const singleParentProblemQuestion: IQuestion = {
   id: 11,
   title:
-    'Single {gender} who {has_children} need a slightly different approach to find their perfect partner. But first, how did you feel in your last relationship?',
+    'Single {gender} who {isParent} need a slightly different approach to find their perfect partner. But first, how did you feel in your last relationship?',
   type: 'question',
-  dataKey: 'last_relationship_feelings',
+  dataKey: 'lastRelationshipMood',
   options: [
     {
       title: 'I was unhappy with low things were going in my relationship',
@@ -281,7 +282,7 @@ const singleParentProblemQuestion: IQuestion = {
     {
       title:
         'I was unhappy with parts of my relationship, but some thing were working',
-      dataValue: 'min_unhappy',
+      dataValue: 'neutral',
       getNextQuestionId: () => partnerIntrovertOrExtrovertQuestion.id,
     },
     {
@@ -300,9 +301,9 @@ const singleParentProblemQuestion: IQuestion = {
 const inRelationshipProblemQuestion: IQuestion = {
   id: 5,
   title:
-    'A {gender} who {has_children} need a slightly different approach to improve their relationship. Which statement best describes you?',
+    'A {gender} who {isParent} need a slightly different approach to improve their relationship. Which statement best describes you?',
   type: 'question',
-  dataKey: 'relationship_feelings',
+  dataKey: 'currentRelationshipMood',
   options: [
     {
       title: 'I`m very unhappy with how things are going in my relationship',
@@ -312,7 +313,7 @@ const inRelationshipProblemQuestion: IQuestion = {
     {
       title:
         'I`m unhappy with parts of my relationship, but some things are working well',
-      dataValue: 'mid_unhappy',
+      dataValue: 'neutral',
       getNextQuestionId: () => overthinkQuestion.id,
     },
     {
@@ -327,16 +328,16 @@ const isSingleParentQuestion: IQuestion = {
   id: 3,
   title: 'Are you a single parent?',
   type: 'question',
-  dataKey: 'has_children',
+  dataKey: 'isParent',
   options: [
     {
       title: 'Yes',
-      dataValue: 'has children',
+      dataValue: true,
       getNextQuestionId: () => inRelationshipProblemQuestion.id,
     },
     {
       title: 'No',
-      dataValue: 'doesn`t have children',
+      dataValue: false,
       getNextQuestionId: () => inRelationshipProblemQuestion.id,
     },
   ],
@@ -346,16 +347,16 @@ const isParentQuestion: IQuestion = {
   id: 4,
   title: 'Are you a parent?',
   type: 'question',
-  dataKey: 'has_children',
+  dataKey: 'isParent',
   options: [
     {
       title: 'Yes',
-      dataValue: 'has children',
+      dataValue: true,
       getNextQuestionId: () => singleParentProblemQuestion.id,
     },
     {
       title: 'No',
-      dataValue: 'doesn`t have children',
+      dataValue: false,
       getNextQuestionId: () => singleParentProblemQuestion.id,
     },
   ],
@@ -366,16 +367,16 @@ const relationshipStatusQuestion: IQuestion = {
   title:
     'So we can get to know you better, tell us about your relationship status',
   type: 'question',
-  dataKey: 'relationship_status',
+  dataKey: 'isSingle',
   options: [
     {
       title: 'Single',
-      dataValue: 'single',
+      dataValue: true,
       getNextQuestionId: () => isSingleParentQuestion.id,
     },
     {
       title: 'In a relationship',
-      dataValue: 'in_relationship',
+      dataValue: false,
       getNextQuestionId: () => isParentQuestion.id,
     },
   ],

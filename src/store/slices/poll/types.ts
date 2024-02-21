@@ -1,10 +1,10 @@
-export type IUserData = Record<string, string>;
+import { IUserData } from '@/models/IUserData';
 
 export interface IUserDataItem {
-  dataKey: string;
-  dataValue: string;
+  dataKey: keyof IUserData;
+  dataValue: IUserData[keyof IUserData];
 }
 
 export interface IState {
-  userData: IUserData;
+  userData: Partial<IUserData>;
 }

@@ -10,7 +10,9 @@ const pollSlice = createSlice({
   name: 'poll',
   reducers: {
     updateUserData: (state, action: PayloadAction<IUserDataItem>) => {
-      state.userData[action.payload.dataKey] = action.payload.dataValue;
+      // using any to avoid type error that happens when using Partial utility type on store objects.
+      console.log('action', action.payload);
+      state.userData[action.payload.dataKey] = action.payload.dataValue as any;
     },
     resetUserData: (state) => {
       state.userData = {};

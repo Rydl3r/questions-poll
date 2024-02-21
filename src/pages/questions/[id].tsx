@@ -14,6 +14,8 @@ import logoLight from '@/assets/logo-light.png';
 import Link from 'next/link';
 import { IProps } from './types';
 import Head from 'next/head';
+import { IUserData } from '@/models/IUserData';
+import getFormattedPlaceholder from '@/helpers/getFormattedPlaceholder';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = questions?.map((question) => ({
@@ -40,11 +42,14 @@ const QuestionPage = ({ id }: IProps) => {
   const question = questions?.find((item) => item.id === +id);
 
   // replace string {placeholder} with actual data from userData
-  // example - 'Hello {name}' => 'Hello {userData.name}' => 'Hello John'
-  const title = question?.title?.replace(
-    /{([^}]+)}/g,
-    (_, match) => userData[match]
-  );
+  // example 1 - 'My name is {name}' => 'My name is {getFormattedPlaceholder('name', userData.name)}' => 'My name is {userData.name}' => 'My name is John'
+  // example 2 - 'I {hasChildren}' => 'I {getFormattedPlaceholder('hasChildren', userData.hasChildren)}' => 'I {userData.hasChildren ? 'have' : 'don't have'} children'
+  const title = question?.title?.replace(/{([^}]+)}/g, (_, match) => {
+    const storeKey = match as keyof IUserData;
+    const storeValue = (userData as IUserData)[storeKey];
+
+    return getFormattedPlaceholder(storeKey, storeValue);
+  });
   const isInfoQuestion = question?.type === 'info';
 
   const handleOptionClick = (option: IQuestionOption) => {
@@ -57,7 +62,7 @@ const QuestionPage = ({ id }: IProps) => {
       );
     }
 
-    const nextQuestionId = option?.getNextQuestionId?.(userData);
+    const nextQuestionId = option?.getNextQuestionId?.(userData as IUserData);
 
     if (!nextQuestionId) {
       router.push('/thankyou');
@@ -110,7 +115,7 @@ const QuestionPage = ({ id }: IProps) => {
           <div className='flex flex-col gap-5'>
             {question?.options?.map((option) => (
               <button
-                key={option?.dataValue}
+                key={option?.dataValue?.toString()}
                 onClick={() => handleOptionClick(option)}
                 className='bg-button-info w-full px-5 py-3 rounded-2xl border-[1px] border-solid border-[#E0E0E0] hover:bg-button-focus'
               >
