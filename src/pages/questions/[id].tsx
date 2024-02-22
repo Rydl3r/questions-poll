@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
-import questions from '../../config';
+import questions from '@/config';
 import { useRouter } from 'next/router';
 import { updateUserData } from '@/store/slices/poll';
 import { useAppSelector } from '@/hooks/redux';

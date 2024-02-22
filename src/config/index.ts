@@ -1,4 +1,4 @@
-import { IQuestion } from '../models/IQuestion';
+import { IQuestion } from '@/models/IQuestion';
 import {
   Source,
   Gender,
