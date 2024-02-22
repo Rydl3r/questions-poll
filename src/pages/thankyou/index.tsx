@@ -1,4 +1,4 @@
-import InfoScreen from '@/components/InfoScreen';
+import InfoDisplay from '@/components/InfoDisplay';
 import { useAppDispatch } from '@/hooks/redux';
 import { resetUserData } from '@/store/slices/poll';
 import Head from 'next/head';
@@ -20,7 +20,7 @@ export default function ThankYou() {
       <Head>
         <title>Thank you for completing the poll!</title>
       </Head>
-      <InfoScreen
+      <InfoDisplay
         title='Thank you for completing the poll!
           Our specialists will get back to you soon.'
         buttonText='Restart poll'

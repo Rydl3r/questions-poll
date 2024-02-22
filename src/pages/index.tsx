@@ -1,4 +1,4 @@
-import InfoScreen from '@/components/InfoScreen';
+import InfoDisplay from '@/components/InfoDisplay';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
@@ -15,7 +15,7 @@ export default function Home() {
       <Head>
         <title>OBRIO Test Poll</title>
       </Head>
-      <InfoScreen
+      <InfoDisplay
         title='Welcome to this OBRIO test poll!'
         buttonText='Start!'
         onSubmit={handleStart}

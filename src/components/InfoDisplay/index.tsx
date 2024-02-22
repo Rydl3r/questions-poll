@@ -1,6 +1,6 @@
 import { IProps } from './types';
 
-const InfoScreen: React.FC<IProps> = ({ title, buttonText, onSubmit }) => {
+const InfoDisplay: React.FC<IProps> = ({ title, buttonText, onSubmit }) => {
   return (
     <div className='bg-paper-info px-4 h-screen'>
       <div className='max-w-80 sm:max-w-96 mx-auto flex flex-col pt-16 px-4'>
@@ -18,4 +18,4 @@ const InfoScreen: React.FC<IProps> = ({ title, buttonText, onSubmit }) => {
   );
 };
 
-export default InfoScreen;
+export default InfoDisplay;
