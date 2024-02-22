@@ -8,13 +8,15 @@ import {
   GoalsMood,
   EmotionalControlTricky,
   MostImportantThing,
+  QuestionTypes,
+  UserDataKeys,
 } from '@/const';
 
 const aboutUsQuestion: IQuestion = {
   id: 10,
   title: 'How did you heard about us',
-  type: 'question',
-  dataKey: 'source',
+  type: QuestionTypes.Question,
+  dataKey: UserDataKeys.Source,
   options: [
     {
       title: 'Poster or Billboard',
@@ -86,8 +88,8 @@ const aboutUsQuestion: IQuestion = {
 const whatIsMostImportantQuestion: IQuestion = {
   id: 8,
   title: 'What is most important to you',
-  type: 'question',
-  dataKey: 'mostImportantThing',
+  type: QuestionTypes.Question,
+  dataKey: UserDataKeys.MostImportantThing,
   options: [
     {
       title: 'Success',
@@ -115,8 +117,8 @@ const whatIsMostImportantQuestion: IQuestion = {
 const isEmotionalControlTricky: IQuestion = {
   id: 9,
   title: 'Is emotional control tricky for you',
-  type: 'question',
-  dataKey: 'isEmotionalControlTricky',
+  type: QuestionTypes.Question,
+  dataKey: UserDataKeys.IsEmotionalControlTricky,
   options: [
     {
       title: 'Yes',
@@ -146,10 +148,11 @@ const howDoesItWorkQuestion: IQuestion = {
   title: 'So how does it work?',
   description:
     'We analyze hundreds of data points to create your unique astrological blueprint. This is combined with AI to tailor-make your astrological insights, based on your answers. We’re going to change your relationship with astrology.',
-  type: 'info',
+  type: QuestionTypes.Info,
   options: [
     {
       title: 'Next',
+      dataValue: true,
       getNextQuestionId: (userData) =>
         userData.tendToOverthink
           ? whatIsMostImportantQuestion.id
@@ -161,8 +164,8 @@ const howDoesItWorkQuestion: IQuestion = {
 const overthinkQuestion: IQuestion = {
   id: 6,
   title: 'Do you tend to overthink',
-  type: 'question',
-  dataKey: 'tendToOverthink',
+  type: QuestionTypes.Question,
+  dataKey: UserDataKeys.TendToOverthink,
   options: [
     {
       title: 'Yes',
@@ -180,8 +183,8 @@ const overthinkQuestion: IQuestion = {
 const relationshipGoalsQuestion: IQuestion = {
   id: 15,
   title: 'When you think about your relationship goals, you feel...?',
-  type: 'question',
-  dataKey: 'relationshipGoalsMood',
+  type: QuestionTypes.Question,
+  dataKey: UserDataKeys.RelationshipGoalsMood,
   options: [
     {
       title: 'Optimistic! They are totally doable, with some guidance.',
@@ -205,8 +208,8 @@ const partnerPriorityQuestion: IQuestion = {
   id: 14,
   title: 'Do you agree with the statement below?',
   description: '"My partner and I make sex a priority in our relationship"',
-  type: 'question',
-  dataKey: 'sexIsAPriority',
+  type: QuestionTypes.Question,
+  dataKey: UserDataKeys.SexIsAPriority,
   options: [
     {
       title: 'Strongly agree',
@@ -239,8 +242,8 @@ const partnerPriorityQuestion: IQuestion = {
 const partnerGenderQuestion: IQuestion = {
   id: 13,
   title: 'What is your partner`s gender?',
-  type: 'question',
-  dataKey: 'partnerGender',
+  type: QuestionTypes.Question,
+  dataKey: UserDataKeys.PartnerGender,
   options: [
     {
       title: 'Male',
@@ -258,8 +261,8 @@ const partnerGenderQuestion: IQuestion = {
 const partnerIntrovertOrExtrovertQuestion: IQuestion = {
   id: 12,
   title: 'Is your partner an introvert or extrovert?',
-  type: 'question',
-  dataKey: 'partnerPersonality',
+  type: QuestionTypes.Question,
+  dataKey: UserDataKeys.PartnerPersonality,
   options: [
     {
       title: 'Introvert',
@@ -283,8 +286,8 @@ const singleParentProblemQuestion: IQuestion = {
   id: 11,
   title:
     'Single {gender} who {isParent} need a slightly different approach to find their perfect partner. But first, how did you feel in your last relationship?',
-  type: 'question',
-  dataKey: 'lastRelationshipMood',
+  type: QuestionTypes.Question,
+  dataKey: UserDataKeys.LastRelationshipMood,
   options: [
     {
       title: 'I was unhappy with low things were going in my relationship',
@@ -314,8 +317,8 @@ const inRelationshipProblemQuestion: IQuestion = {
   id: 5,
   title:
     'A {gender} who {isParent} need a slightly different approach to improve their relationship. Which statement best describes you?',
-  type: 'question',
-  dataKey: 'currentRelationshipMood',
+  type: QuestionTypes.Question,
+  dataKey: UserDataKeys.CurrentRelationshipMood,
   options: [
     {
       title: 'I`m very unhappy with how things are going in my relationship',
@@ -343,8 +346,8 @@ const inRelationshipProblemQuestion: IQuestion = {
 const isParentQuestion: IQuestion = {
   id: 4,
   title: 'Are you a {isSingle}parent?',
-  type: 'question',
-  dataKey: 'isParent',
+  type: QuestionTypes.Question,
+  dataKey: UserDataKeys.IsParent,
   options: [
     {
       title: 'Yes',
@@ -369,8 +372,8 @@ const relationshipStatusQuestion: IQuestion = {
   id: 2,
   title:
     'So we can get to know you better, tell us about your relationship status',
-  type: 'question',
-  dataKey: 'isSingle',
+  type: QuestionTypes.Question,
+  dataKey: UserDataKeys.IsSingle,
   options: [
     {
       title: 'Single',
@@ -388,8 +391,8 @@ const relationshipStatusQuestion: IQuestion = {
 const genderQuestion: IQuestion = {
   id: 1,
   title: 'Select your gender',
-  type: 'question',
-  dataKey: 'gender',
+  type: QuestionTypes.Question,
+  dataKey: UserDataKeys.Gender,
   options: [
     {
       title: 'Female',

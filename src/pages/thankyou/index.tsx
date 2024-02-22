@@ -1,4 +1,4 @@
-import InfoScreen from '@/components/infoscreen';
+import InfoScreen from '@/components/InfoScreen';
 import { useAppDispatch } from '@/hooks/redux';
 import { resetUserData } from '@/store/slices/poll';
 import Head from 'next/head';

@@ -7,21 +7,25 @@ import {
   EmotionalControlTricky,
   MostImportantThing,
   Source,
+  UserDataKeys,
 } from '@/const';
 
 export interface IUserData {
-  gender: Gender;
-  partnerGender: Gender;
-  isSingle: boolean;
-  isParent: boolean;
-  currentRelationshipMood: Exclude<Mood, Mood.NeverInRelationship>;
-  lastRelationshipMood: Mood;
-  personality: Personality;
-  partnerPersonality: Personality;
-  sexIsAPriority: SexIsPriority;
-  relationshipGoalsMood: GoalsMood;
-  tendToOverthink: boolean;
-  isEmotionalControlTricky: EmotionalControlTricky;
-  mostImportantThing: MostImportantThing;
-  source: Source;
+  [UserDataKeys.Gender]: Gender;
+  [UserDataKeys.PartnerGender]: Gender;
+  [UserDataKeys.IsSingle]: boolean;
+  [UserDataKeys.IsParent]: boolean;
+  [UserDataKeys.CurrentRelationshipMood]: Exclude<
+    Mood,
+    Mood.NeverInRelationship
+  >;
+  [UserDataKeys.LastRelationshipMood]: Mood;
+  [UserDataKeys.Personality]: Personality;
+  [UserDataKeys.PartnerPersonality]: Personality;
+  [UserDataKeys.SexIsAPriority]: SexIsPriority;
+  [UserDataKeys.RelationshipGoalsMood]: GoalsMood;
+  [UserDataKeys.TendToOverthink]: boolean;
+  [UserDataKeys.IsEmotionalControlTricky]: EmotionalControlTricky;
+  [UserDataKeys.MostImportantThing]: MostImportantThing;
+  [UserDataKeys.Source]: Source;
 }

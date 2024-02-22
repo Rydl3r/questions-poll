@@ -1,4 +1,4 @@
-import InfoScreen from '@/components/infoscreen';
+import InfoScreen from '@/components/InfoScreen';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 

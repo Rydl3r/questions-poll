@@ -68,7 +68,7 @@ const QuestionPage = ({ id }: { id: number }) => {
       // if we dont have a next question, we need to redirect the user to the thank you page, because the poll has ended
       router.push('/thankyou');
     } else {
-      // if we have a next question, we need to redirect the user to the next question
+      // if we have a next question, we need to redirect the user to it
       router.push(`/questions/${nextQuestionId}`);
     }
   };

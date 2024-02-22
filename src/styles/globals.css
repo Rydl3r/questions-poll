@@ -1,11 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --pink_light: #fff0f0;
-}
-
-body {
-  background: var(--pink_light);
-}

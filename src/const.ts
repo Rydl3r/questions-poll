@@ -1,3 +1,25 @@
+export enum QuestionTypes {
+  Question = 'question',
+  Info = 'info',
+}
+
+export enum UserDataKeys {
+  Gender = 'gender',
+  PartnerGender = 'partnerGender',
+  IsSingle = 'isSingle',
+  IsParent = 'isParent',
+  CurrentRelationshipMood = 'currentRelationshipMood',
+  LastRelationshipMood = 'lastRelationshipMood',
+  Personality = 'personality',
+  PartnerPersonality = 'partnerPersonality',
+  SexIsAPriority = 'sexIsAPriority',
+  RelationshipGoalsMood = 'relationshipGoalsMood',
+  TendToOverthink = 'tendToOverthink',
+  IsEmotionalControlTricky = 'isEmotionalControlTricky',
+  MostImportantThing = 'mostImportantThing',
+  Source = 'source',
+}
+
 export enum Gender {
   Male = 'male',
   Female = 'female',
