@@ -10,7 +10,7 @@ export const ArrowIcon = (props: React.SVGProps<SVGSVGElement>) => {
     >
       <path
         d='M7.5 12L15 4.5L16.05 5.55L9.6 12L16.05 18.45L15 19.5L7.5 12Z'
-        fill='#333333'
+        fill='currentColor'
       />
     </svg>
   );

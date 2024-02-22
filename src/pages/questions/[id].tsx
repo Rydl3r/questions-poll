@@ -12,7 +12,6 @@ import { ArrowIcon } from '@/assets/icons';
 import logo from '@/assets/logo.png';
 import logoLight from '@/assets/logo-light.png';
 import Link from 'next/link';
-import { IProps } from './types';
 import Head from 'next/head';
 import { IUserData } from '@/models/IUserData';
 import getFormattedPlaceholder from '@/helpers/getFormattedPlaceholder';
@@ -35,7 +34,7 @@ export const getStaticProps: GetStaticProps = async (
   };
 };
 
-const QuestionPage = ({ id }: IProps) => {
+const QuestionPage = ({ id }: { id: number }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { userData } = useAppSelector((state) => state.poll);
@@ -53,7 +52,8 @@ const QuestionPage = ({ id }: IProps) => {
   const isInfoQuestion = question?.type === 'info';
 
   const handleOptionClick = (option: IQuestionOption) => {
-    if (question?.dataKey && option?.dataValue) {
+    // if the question has a dataKey and the option has a dataValue, we need to update the user answers data in the store
+    if (question?.dataKey && typeof option?.dataValue !== 'undefined') {
       dispatch(
         updateUserData({
           dataKey: question?.dataKey,
@@ -65,13 +65,12 @@ const QuestionPage = ({ id }: IProps) => {
     const nextQuestionId = option?.getNextQuestionId?.(userData as IUserData);
 
     if (!nextQuestionId) {
+      // if we dont have a next question, we need to redirect the user to the thank you page, because the poll has ended
       router.push('/thankyou');
-      return;
+    } else {
+      // if we have a next question, we need to redirect the user to the next question
+      router.push(`/questions/${nextQuestionId}`);
     }
-
-    router.push({
-      pathname: `/questions/${nextQuestionId}`,
-    });
   };
 
   return (
@@ -81,14 +80,14 @@ const QuestionPage = ({ id }: IProps) => {
       </Head>
       <div
         className={`${
-          isInfoQuestion ? 'bg-explanatory-info-bg' : '#FFF0F0'
+          isInfoQuestion ? 'bg-gradient-primary' : 'bg-paper-info'
         } px-4 h-screen`}
       >
         <div className='flex w-full items-center p-4 mb-5'>
           <ArrowIcon
             onClick={router.back}
             className={`cursor-pointer ${
-              isInfoQuestion ? '[&>*]:fill-white' : ''
+              isInfoQuestion ? 'text-white' : 'text-dark'
             }`}
           />
           <Link
@@ -99,25 +98,37 @@ const QuestionPage = ({ id }: IProps) => {
             <Image src={isInfoQuestion ? logoLight : logo} alt='Nebula logo' />
           </Link>
         </div>
-        <div className='max-w-[362px] mx-auto flex flex-col'>
-          <h1
-            className={`font-bold text-[24px] leading-[1.16] ${
-              isInfoQuestion ? 'text-[#FBFBFF]' : 'text-[#333]'
-            } mb-[30px]`}
-          >
-            {title}
-          </h1>
-          {question?.description && (
-            <p className='text-[14px] text-[#FBFBFF] leading-[1.8] mb-10'>
-              {question?.description}
-            </p>
-          )}
+        <div className='max-w-80 sm:max-w-96 mx-auto flex flex-col'>
+          <div className='mb-8 flex flex-col gap-5'>
+            <h1
+              className={`font-bold text-2xl ${
+                isInfoQuestion ? 'text-light text-center' : 'text-dark'
+              } ${question?.description ? 'text-center' : ''}`}
+            >
+              {title}
+            </h1>
+            {question?.description && (
+              <p
+                className={
+                  isInfoQuestion
+                    ? 'text-light text-center text-sm leading-6'
+                    : 'text-dark font-bold text-lg text-center'
+                }
+              >
+                {question?.description}
+              </p>
+            )}
+          </div>
           <div className='flex flex-col gap-5'>
             {question?.options?.map((option) => (
               <button
                 key={option?.dataValue?.toString()}
                 onClick={() => handleOptionClick(option)}
-                className='bg-button-info w-full px-5 py-3 rounded-2xl border-[1px] border-solid border-[#E0E0E0] hover:bg-button-focus'
+                className={`bg-button-info w-full px-5 py-3 rounded-2xl border border-solid border-light ${
+                  isInfoQuestion
+                    ? 'text-violet shadow-button-violet hover:bg-button-active'
+                    : 'shadow-button-dark hover:bg-gradient-primary hover:text-light'
+                }`}
               >
                 {option.title}
               </button>

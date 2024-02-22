@@ -10,16 +10,24 @@ const config: Config = {
     extend: {
       backgroundColor: {
         'button-info': '#EAEEF7',
-        'button-focus': '#DCDFE6',
+        'button-active': '#DCDFE6',
+        'paper-info': '#FFF0F0',
       },
       backgroundImage: {
-        'button-active':
-          'linear-gradient(166deg, #141333 -33.39%, #202261 15.89%, #543C97 55.84%, #6939A1 74.96%)',
-        'explanatory-info-bg':
+        'gradient-primary':
           'linear-gradient(166deg, #141333 -33.39%, #202261 15.89%, #543C97 55.84%, #6939A1 74.96%)',
       },
+      borderColor: {
+        light: '#E0E0E0',
+      },
       colors: {
-        'button-active': '#FBFBFF',
+        dark: '#333',
+        light: '#FBFBFF',
+        violet: '#6A3AA2',
+      },
+      boxShadow: {
+        'button-dark': '2px 2px 6px 0px #543C9740',
+        'button-violet': '0px 4px 4px 0px #D8D6D640',
       },
     },
   },
