@@ -1,7 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
+import {
+  GetStaticPaths,
+  GetStaticProps,
+  GetStaticPropsContext,
+  InferGetStaticPropsType,
+} from 'next';
 import questions from '@/config';
 import { useRouter } from 'next/router';
 import { updateUserData } from '@/store/slices/poll';
@@ -13,25 +18,27 @@ import Head from 'next/head';
 import { IUserData } from '@/models/IUserData';
 import getFormattedPlaceholder from '@/helpers/getFormattedPlaceholder';
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths = (async () => {
   const paths = questions?.map((question) => ({
     params: { id: question?.id?.toString() },
   }));
 
   return { paths, fallback: true };
-};
+}) satisfies GetStaticPaths;
 
-export const getStaticProps: GetStaticProps = async (
-  context: GetStaticPropsContext
-) => {
+export const getStaticProps = (async (context: GetStaticPropsContext) => {
   return {
     props: {
-      id: context.params?.id,
+      id: context.params?.id as string,
     },
   };
-};
+}) satisfies GetStaticProps<{
+  id: string;
+}>;
 
-const QuestionPage = ({ id }: { id: number }) => {
+const QuestionPage = ({
+  id,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { userData } = useAppSelector((state) => state.poll);
