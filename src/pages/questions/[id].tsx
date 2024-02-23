@@ -7,10 +7,7 @@ import { useRouter } from 'next/router';
 import { updateUserData } from '@/store/slices/poll';
 import { useAppSelector } from '@/hooks/redux';
 import { IQuestionOption } from '@/models/IQuestion';
-import { ArrowIcon } from '@/assets/icons';
 
-import logo from '@/assets/logo.png';
-import logoLight from '@/assets/logo-light.png';
 import Link from 'next/link';
 import Head from 'next/head';
 import { IUserData } from '@/models/IUserData';
@@ -83,23 +80,36 @@ const QuestionPage = ({ id }: { id: number }) => {
           isInfoQuestion ? 'bg-gradient-primary' : 'bg-paper-info'
         } px-4 h-screen`}
       >
-        <div className='flex w-full items-center p-4 mb-5'>
-          <ArrowIcon
+        <div className="flex w-full items-center p-4 mb-5">
+          <Image
+            src={
+              isInfoQuestion
+                ? '/assets/icons/arrow-light.svg'
+                : '/assets/icons/arrow.svg'
+            }
+            width={24}
+            height={24}
             onClick={router.back}
-            className={`cursor-pointer ${
-              isInfoQuestion ? 'text-white' : 'text-dark'
-            }`}
+            alt="arrow"
+            className="cursor-pointer"
           />
           <Link
-            className='mx-auto'
-            href='https://asknebula.com/'
-            target='_blank'
+            className="mx-auto"
+            href="https://asknebula.com/"
+            target="_blank"
           >
-            <Image src={isInfoQuestion ? logoLight : logo} alt='Nebula logo' />
+            <Image
+              src={
+                isInfoQuestion ? '/assets/logo-light.png' : '/assets/logo.png'
+              }
+              width={16}
+              height={16}
+              alt="Nebula logo"
+            />
           </Link>
         </div>
-        <div className='max-w-80 sm:max-w-96 mx-auto flex flex-col'>
-          <div className='mb-8 flex flex-col gap-5'>
+        <div className="max-w-80 sm:max-w-96 mx-auto flex flex-col">
+          <div className="mb-8 flex flex-col gap-5">
             <h1
               className={`font-bold text-2xl ${
                 isInfoQuestion ? 'text-light text-center' : 'text-dark'
@@ -119,7 +129,7 @@ const QuestionPage = ({ id }: { id: number }) => {
               </p>
             )}
           </div>
-          <div className='flex flex-col gap-5'>
+          <div className="flex flex-col gap-5">
             {question?.options?.map((option) => (
               <button
                 key={option?.dataValue?.toString()}

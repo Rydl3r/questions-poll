@@ -16,8 +16,8 @@ export default function Home() {
         <title>OBRIO Test Poll</title>
       </Head>
       <InfoDisplay
-        title='Welcome to this OBRIO test poll!'
-        buttonText='Start!'
+        title="Welcome to this OBRIO test poll!"
+        buttonText="Start!"
         onSubmit={handleStart}
       />
     </>

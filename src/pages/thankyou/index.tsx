@@ -21,9 +21,9 @@ export default function ThankYou() {
         <title>Thank you for completing the poll!</title>
       </Head>
       <InfoDisplay
-        title='Thank you for completing the poll!
-          Our specialists will get back to you soon.'
-        buttonText='Restart poll'
+        title="Thank you for completing the poll!
+          Our specialists will get back to you soon."
+        buttonText="Restart poll"
         onSubmit={handleButtonClick}
       />
     </>
